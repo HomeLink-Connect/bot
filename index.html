@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#081321">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="WiseTrendBot">
+  <title>WiseTrendBot</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <style>
+    :root{color-scheme:dark;--bg:#081321;--panel:#101f31;--panel2:#14263b;--line:#23374d;--muted:#91a4b9;--text:#edf4fb;--green:#36d6a0;--red:#ff7185;--blue:#75b8ff}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#142a40 0,#081321 48%);color:var(--text);font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:env(safe-area-inset-top) 16px calc(24px + env(safe-area-inset-bottom))}
+    .wrap{max-width:620px;margin:0 auto}.top{display:flex;justify-content:space-between;align-items:center;padding:18px 2px 22px}.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px}.logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(145deg,#1b8c82,#164b69);display:grid;place-items:center;font-weight:900;color:white}.tag{font-size:11px;color:#ffd58a;border:1px solid #725b31;background:#382d1a;padding:6px 9px;border-radius:20px}
+    .eyebrow{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:1.3px}.pair{font-size:25px;font-weight:800;margin:5px 0}.sub{color:var(--muted);font-size:13px}.card{background:linear-gradient(160deg,rgba(20,38,59,.98),rgba(13,28,44,.98));border:1px solid var(--line);border-radius:20px;padding:17px;margin:13px 0;box-shadow:0 12px 30px #0002}.price-row{display:flex;align-items:end;justify-content:space-between;margin-top:16px}.price{font-size:32px;font-weight:800;letter-spacing:-1px}.change{color:var(--green);font-weight:700;font-size:13px}.signal{display:flex;align-items:center;justify-content:space-between;gap:12px}.signal-pill{font-weight:800;letter-spacing:.6px;padding:9px 13px;border-radius:12px;background:#24364a;color:#c8d5e3}.signal-pill.wait{color:#ffd58a;background:#3a301e}.signal-pill.buy{color:var(--green);background:#12382f}.signal-pill.sell{color:var(--red);background:#402431}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.metric{background:#0b1929;border:1px solid #1d3045;border-radius:14px;padding:13px}.metric small{display:block;color:var(--muted);font-size:11px;margin-bottom:7px}.metric strong{font-size:19px}.meter{height:7px;background:#25384d;border-radius:8px;overflow:hidden;margin-top:10px}.meter span{display:block;height:100%;width:50%;background:linear-gradient(90deg,#42c99a,#75b8ff);border-radius:8px}
+    .chart{height:150px;display:flex;align-items:end;gap:5px;padding:12px 2px 2px}.bar{flex:1;border-radius:4px 4px 1px 1px;min-width:5px;background:linear-gradient(#38c99b,#167b70);opacity:.9}.bar.down{background:linear-gradient(#ff8797,#a8445b)}.chart-labels{display:flex;justify-content:space-between;color:var(--muted);font-size:10px}
+    .section-title{font-size:16px;font-weight:750;margin-bottom:13px}.row{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #203248}.row:last-child{border:0}.row span:first-child{color:var(--muted)}.notice{font-size:12px;line-height:1.55;color:#b4c2d1;background:#19283a;border-radius:13px;padding:12px;margin-top:14px}.btn{width:100%;border:1px solid #2a4963;background:#173650;color:#eaf5ff;padding:13px;border-radius:13px;font-weight:750;font-size:14px;margin-top:12px}.foot{text-align:center;color:#71869c;font-size:11px;padding:16px 4px}.tabs{display:flex;gap:8px;margin:12px 0}.tab{flex:1;text-align:center;border:1px solid var(--line);border-radius:10px;padding:9px;color:var(--muted);font-size:12px}.tab.active{background:#173650;color:white;border-color:#316080}
+    @media(min-width:560px){body{padding-top:24px}.pair{font-size:29px}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top"><div class="brand"><div class="logo">W</div><div>WiseTrendBot<div class="sub">EUR/USD trend monitor</div></div></div><div class="tag">DEMO PREVIEW</div></header>
+  <section class="card">
+    <div class="eyebrow">Market overview · M15</div><div class="pair">EUR / USD</div><div class="sub">Illustrative interface data — not a live quote</div>
+    <div class="price-row"><div><div class="eyebrow">Sample price</div><div class="price">1.08425</div></div><div class="change">+0.12% <div class="sub">Example only</div></div></div>
+  </section>
+  <section class="card">
+    <div class="signal"><div><div class="eyebrow">Current strategy status</div><div class="section-title" style="margin:6px 0 0">Trend signal</div></div><div class="signal-pill wait" id="signal">WAIT</div></div>
+    <div class="notice">This preview uses sample values. It does not connect to a broker, receive live prices, or place trades. Live data will be added only after choosing and configuring a market-data provider.</div>
+  </section>
+  <section class="card">
+    <div class="section-title">Indicator panel</div>
+    <div class="grid">
+      <div class="metric"><small>EMA 50 · sample</small><strong>1.08410</strong></div>
+      <div class="metric"><small>EMA 200 · sample</small><strong>1.08380</strong></div>
+      <div class="metric"><small>RSI 14 · sample</small><strong>54.6</strong><div class="meter"><span style="width:54.6%"></span></div></div>
+      <div class="metric"><small>ATR 14 · sample</small><strong>0.00082</strong></div>
+    </div>
+  </section>
+  <section class="card">
+    <div class="section-title">Illustrative price movement</div>
+    <div class="chart" aria-label="Decorative sample chart">
+      <i class="bar" style="height:42%"></i><i class="bar down" style="height:34%"></i><i class="bar" style="height:48%"></i><i class="bar" style="height:55%"></i><i class="bar down" style="height:43%"></i><i class="bar" style="height:60%"></i><i class="bar" style="height:52%"></i><i class="bar down" style="height:46%"></i><i class="bar" style="height:67%"></i><i class="bar" style="height:73%"></i><i class="bar down" style="height:62%"></i><i class="bar" style="height:82%"></i><i class="bar" style="height:75%"></i><i class="bar" style="height:91%"></i><i class="bar down" style="height:80%"></i><i class="bar" style="height:96%"></i>
+    </div><div class="chart-labels"><span>Earlier</span><span>Sample candles · not market data</span><span>Latest</span></div>
+  </section>
+  <section class="card">
+    <div class="section-title">Strategy rules</div>
+    <div class="row"><span>Chart timeframe</span><strong>M15</strong></div>
+    <div class="row"><span>Trend filter</span><strong>EMA 50 / EMA 200</strong></div>
+    <div class="row"><span>Momentum filter</span><strong>RSI 14</strong></div>
+    <div class="row"><span>Volatility measure</span><strong>ATR 14</strong></div>
+    <div class="row"><span>Trading mode</span><strong>Signal-only demo</strong></div>
+    <button class="btn" id="refresh">Refresh preview</button>
+  </section>
+  <div class="foot">WiseTrendBot · Educational demo interface<br>Trading involves risk. Signals are not guarantees of results.</div>
+</div>
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {}));
+  }
+  document.getElementById("refresh").addEventListener("click", () => {
+    const el = document.getElementById("signal");
+    el.textContent = "WAIT";
+    el.className = "signal-pill wait";
+    alert("Preview refreshed. These are still sample values, not live market data.");
+  });
+</script>
+</body>
+</html>

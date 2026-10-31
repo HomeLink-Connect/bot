@@ -1,0 +1,13 @@
+{
+  "name": "WiseTrendBot",
+  "short_name": "WiseTrendBot",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#081321",
+  "theme_color": "#081321",
+  "description": "Educational EUR/USD trend-monitor preview",
+  "icons": [
+    {"src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}
+  ]
+}
