@@ -1,87 +1,239 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#07111f">
+<title>AlphaPilot</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#05080f">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="WiseTrendBot">
-<meta name="description" content="WiseTrendBot educational EUR/USD trend analysis simulator.">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="icon.svg">
-<title>WiseTrendBot | EUR/USD Lab</title>
+<meta name="apple-mobile-web-app-title" content="AlphaPilot">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" id="touchIcon" href="icon.svg">
 <style>
-:root{color-scheme:dark;--bg:#07111f;--surface:#0d1b2b;--surface2:#12243a;--line:#20364d;--text:#eff6ff;--muted:#8fa4ba;--mint:#50e0b0;--red:#ff758b;--blue:#79baff;--gold:#f4c879;--shadow:0 16px 38px #0004}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 50% -15%,#1a3851 0,transparent 48%),var(--bg);color:var(--text);font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:env(safe-area-inset-top) 14px calc(28px + env(safe-area-inset-bottom))}.app{max-width:720px;margin:auto}.topbar{display:flex;align-items:center;justify-content:space-between;padding:17px 2px 19px}.brand{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:850;letter-spacing:-.3px}.brand small{display:block;color:var(--muted);font-size:10px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase}.logo{width:40px;height:40px;border-radius:13px;background:linear-gradient(145deg,#168f86,#174b70);display:grid;place-items:center;font-size:20px;font-weight:900;box-shadow:0 7px 20px #0a82744a}.demo{border:1px solid #66552f;background:#332b1c;color:#f7d58f;border-radius:30px;padding:6px 10px;font-size:10px;font-weight:800;letter-spacing:.7px}.hero{background:linear-gradient(135deg,#132c42,#0d1b2b 72%);border:1px solid #28445d;border-radius:22px;padding:18px;box-shadow:var(--shadow);position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;background:#2bbf9b0c;right:-70px;top:-85px}.eyebrow{color:var(--muted);font-size:10px;font-weight:750;letter-spacing:1.35px;text-transform:uppercase}.pairline{display:flex;justify-content:space-between;align-items:center;gap:10px}.pair{font-size:25px;font-weight:850;letter-spacing:-.8px;margin-top:4px}.timechip{border:1px solid #29435c;background:#0b1b2b;color:#b8cbe0;padding:7px 10px;border-radius:10px;font-size:11px;font-weight:750}.pricebox{display:flex;align-items:end;justify-content:space-between;margin-top:17px}.price{font-size:34px;line-height:1;font-weight:850;letter-spacing:-1.5px}.price-note{font-size:11px;color:var(--muted);margin-top:6px}.market-state{font-size:11px;color:var(--gold);font-weight:750;text-align:right}.card{background:linear-gradient(155deg,#102137,#0b1928);border:1px solid var(--line);border-radius:19px;padding:16px;margin-top:13px;box-shadow:0 9px 24px #0002}.cardhead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:13px}.title{font-size:14px;font-weight:800;letter-spacing:-.1px}.muted{color:var(--muted)}.tiny{font-size:10px;color:var(--muted)}.signalrow{display:flex;justify-content:space-between;align-items:center;gap:12px}.signalpill{padding:8px 13px;border-radius:10px;font-size:11px;font-weight:900;letter-spacing:1px;background:#302b20;color:var(--gold);border:1px solid #66552f}.signalpill.bull{background:#10352e;color:var(--mint);border-color:#216d5a}.signalpill.bear{background:#3c202c;color:var(--red);border-color:#74384b}.signalcopy{font-size:12px;color:#c0cede;margin-top:8px;line-height:1.5}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.metric{background:#091725;border:1px solid #1c3045;border-radius:13px;padding:12px;min-width:0}.metric .name{font-size:10px;color:var(--muted);font-weight:750;letter-spacing:.7px;text-transform:uppercase}.metric strong{display:block;font-size:19px;margin-top:5px;letter-spacing:-.5px}.metric em{display:block;font-size:10px;color:var(--muted);font-style:normal;margin-top:2px}.chartwrap{position:relative;width:100%;height:245px}.chartwrap canvas{width:100%;height:100%;display:block}.legend{display:flex;gap:13px;flex-wrap:wrap;margin-top:7px}.legend span{font-size:10px;color:var(--muted);display:flex;align-items:center;gap:5px}.dot{width:7px;height:7px;border-radius:50%;display:inline-block}.actions{display:flex;gap:8px}.btn{border:1px solid #2b4a63;background:#15334d;color:#eff8ff;border-radius:11px;padding:10px 12px;font-size:11px;font-weight:800}.btn.primary{background:linear-gradient(135deg,#167b70,#155a70);border-color:#238b7c}.btn:active{transform:scale(.98)}.btnrow{display:flex;gap:8px;flex-wrap:wrap}.bartrack{height:7px;border-radius:20px;background:#24384d;overflow:hidden;margin-top:8px}.barfill{height:100%;width:50%;background:linear-gradient(90deg,#39c99b,#7abaff);border-radius:20px}.readout{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid #1d3044;font-size:12px}.readout:last-child{border:0}.readout span:first-child{color:var(--muted)}.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:#091725;border:1px solid #1d3044;border-radius:12px;padding:11px 8px}.stat small{display:block;color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:.6px}.stat b{display:block;font-size:18px;margin-top:5px}.history{display:grid;gap:8px}.historyitem{display:flex;justify-content:space-between;align-items:center;background:#091725;border:1px solid #1d3044;border-radius:11px;padding:10px 11px;font-size:11px}.tag{font-size:9px;font-weight:900;padding:4px 7px;border-radius:6px}.tag.buy{color:var(--mint);background:#12372f}.tag.sell{color:var(--red);background:#3b202b}.tag.wait{color:var(--gold);background:#352d1e}.notice{border:1px solid #57492d;background:#292619;color:#d9c99f;padding:11px 12px;border-radius:12px;font-size:10px;line-height:1.55;margin-top:12px}.footer{text-align:center;color:#6f849a;font-size:10px;padding:18px 5px 5px}.sectiongap{margin-top:18px}.pilltabs{display:flex;gap:7px}.pilltabs button{flex:1;background:#0a1928;color:var(--muted);border:1px solid #21374d;padding:8px 5px;border-radius:9px;font-size:10px;font-weight:800}.pilltabs button.active{background:#173b55;color:#fff;border-color:#34708d}
-@media(min-width:600px){body{padding-top:25px}.hero{padding:22px}.chartwrap{height:285px}}
+:root{--bg:#05080f;--card:rgba(255,255,255,.05);--line:rgba(255,255,255,.09);--tx:#eaf1ff;--mu:#7d8ba6;--up:#00e5a8;--dn:#ff5d7a;--ac:#22d3ee;color-scheme:dark}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{background:radial-gradient(900px 500px at 80% -10%,rgba(34,211,238,.16),transparent),radial-gradient(700px 400px at -10% 10%,rgba(0,229,168,.12),transparent),var(--bg);color:var(--tx);font:15px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;padding:env(safe-area-inset-top) 0 0;overflow:hidden}
+#app{height:100%;display:flex;flex-direction:column;max-width:560px;margin:0 auto}
+header{display:flex;align-items:center;gap:12px;padding:14px 18px 8px}
+header img{width:40px;height:40px;border-radius:11px;box-shadow:0 4px 18px rgba(34,211,238,.35)}
+header h1{font-size:19px;margin:0;letter-spacing:.2px}
+header small{color:var(--mu);display:block;font-size:12px}
+.pill{margin-left:auto;padding:6px 12px;border-radius:99px;font-size:12px;font-weight:600;background:var(--card);border:1px solid var(--line)}
+.pill.on{color:var(--up);border-color:rgba(0,229,168,.4)}
+.pill.halt{color:var(--dn);border-color:rgba(255,93,122,.4)}
+main{flex:1;overflow-y:auto;padding:8px 16px 24px;-webkit-overflow-scrolling:touch}
+.tab{display:none}.tab.show{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin-bottom:12px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.lbl{color:var(--mu);font-size:12px;text-transform:uppercase;letter-spacing:.8px}
+.big{font-size:34px;font-weight:700;letter-spacing:-.5px;margin:2px 0}
+.up{color:var(--up)}.dn{color:var(--dn)}
+canvas{width:100%;height:130px;display:block;margin-top:8px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.grid .card{margin:0;padding:13px}
+.grid b{font-size:19px;display:block;margin-top:3px}
+.row{display:flex;gap:10px;margin-bottom:12px}
+button{font:inherit;font-weight:600;border:0;border-radius:16px;padding:15px;color:#04101a;background:linear-gradient(135deg,var(--up),var(--ac));flex:1;cursor:pointer}
+button:active{transform:scale(.97)}
+button.alt{background:var(--card);color:var(--tx);border:1px solid var(--line)}
+button.kill{background:linear-gradient(135deg,#ff5d7a,#ff8a5d);color:#fff}
+.mkt,.pos,.hist{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line)}
+.mkt:last-child,.pos:last-child,.hist:last-child{border:0}
+.tag{font-size:11px;font-weight:700;padding:2px 8px;border-radius:7px;margin-right:8px}
+.tag.buy{background:rgba(0,229,168,.15);color:var(--up)}.tag.sell{background:rgba(255,93,122,.15);color:var(--dn)}
+.sub{color:var(--mu);font-size:12px}
+.empty{color:var(--mu);text-align:center;padding:18px 0}
+label{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line)}
+label:last-child{border:0}
+input[type=number]{width:84px;background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:10px;color:var(--tx);padding:8px;font:inherit;text-align:right}
+input[type=checkbox]{width:22px;height:22px;accent-color:#00e5a8}
+nav{display:flex;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:rgba(8,12,22,.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid var(--line)}
+nav a{flex:1;text-align:center;color:var(--mu);font-size:11px;padding:6px 0;cursor:pointer;font-weight:600}
+nav a svg{display:block;margin:0 auto 3px;width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+nav a.on{color:var(--ac)}
+#hint{display:none;margin:0 16px 8px;padding:12px 14px;border-radius:14px;background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.3);font-size:13px}
 </style>
 </head>
 <body>
-<div class="app">
-<header class="topbar"><div class="brand"><div class="logo">W</div><div>WiseTrendBot<small>EUR/USD learning lab</small></div></div><div class="demo">SIMULATOR · DEMO</div></header>
-<section class="hero">
- <div class="pairline"><div><div class="eyebrow">Selected market</div><div class="pair">EUR / USD</div></div><div class="timechip">15 MIN · M15</div></div>
- <div class="pricebox"><div><div class="eyebrow">Simulated last price</div><div class="price" id="price">1.08425</div><div class="price-note" id="priceNote">Illustrative market series · not live</div></div><div class="market-state" id="marketState">SIMULATED DATA<br><span class="tiny">No broker connection</span></div></div>
+<div id="app">
+<header>
+<img src="icon.svg" alt="AlphaPilot logo">
+<div><h1>AlphaPilot</h1><small>Paper trading engine</small></div>
+<span class="pill" id="status">Stopped</span>
+</header>
+<div id="hint"></div>
+<main>
+<section class="tab show" id="t-dash">
+<div class="card"><div class="lbl">Equity</div><div class="big" id="eq">$0</div><div id="dayPnl" class="sub"></div><canvas id="chart" width="600" height="260"></canvas></div>
+<div class="row"><button id="toggle">Start bot</button><button class="kill" id="kill" style="flex:.55">Kill</button></div>
+<div class="grid">
+<div class="card"><span class="lbl">Win rate</span><b id="wr">–</b></div>
+<div class="card"><span class="lbl">Trades</span><b id="nt">0</b></div>
+<div class="card"><span class="lbl">Open P/L</span><b id="open">$0</b></div>
+<div class="card"><span class="lbl">Max drawdown</span><b id="dd">0%</b></div>
+</div>
+<div class="card"><div class="lbl" style="margin-bottom:4px">Markets</div><div id="mkts"></div></div>
 </section>
-<section class="card">
- <div class="signalrow"><div><div class="eyebrow">Strategy assessment</div><div class="title" style="margin-top:4px">EMA trend + RSI confirmation</div></div><div class="signalpill" id="signal">WAIT</div></div>
- <div class="signalcopy" id="signalCopy">Generate a fresh educational price series to see how the indicator rules classify the latest completed sample candle.</div>
+<section class="tab" id="t-trades">
+<div class="card"><div class="lbl">Open positions</div><div id="pos"></div></div>
+<div class="card"><div class="lbl">History</div><div id="hist"></div></div>
 </section>
-<section class="card">
- <div class="cardhead"><div><div class="title">Price action</div><div class="tiny">Synthetic candles with EMA overlays</div></div><div class="pilltabs"><button class="active" id="view15">M15</button><button id="view60">H1</button></div></div>
- <div class="chartwrap"><canvas id="chart" aria-label="Simulated candlestick chart with moving averages"></canvas></div>
- <div class="legend"><span><i class="dot" style="background:#50e0b0"></i>EMA 50</span><span><i class="dot" style="background:#79baff"></i>EMA 200</span><span><i class="dot" style="background:#d6e2ef"></i>Sample candles</span></div>
- <div class="btnrow" style="margin-top:14px"><button class="btn primary" id="regenerate">Generate new simulation</button><button class="btn" id="showRules">Strategy rules</button></div>
+<section class="tab" id="t-cfg">
+<div class="card">
+<label>Risk per trade (%)<input type="number" id="risk" step="0.1" min="0.1"></label>
+<label>Stop loss (pips)<input type="number" id="sl" min="3"></label>
+<label>Reward : Risk<input type="number" id="rr" step="0.1" min="0.5"></label>
+<label>Fast EMA<input type="number" id="fast" min="2"></label>
+<label>Slow EMA<input type="number" id="slow" min="3"></label>
+<label>RSI filter<input type="checkbox" id="rsi"></label>
+<label>Max open trades<input type="number" id="maxPos" min="1"></label>
+<label>Daily loss limit (%)<input type="number" id="dailyLoss" step="0.5" min="0.5"></label>
+</div>
+<div class="row"><button class="alt" id="reset">Reset account</button><button class="alt" id="newday">New trading day</button></div>
+<p class="sub">Prices are simulated for demo and testing. Strategy: EMA crossover with an RSI filter, ATR-free fixed stops, and position sizing from risk %. Connect a broker through a server-side engine before going live.</p>
 </section>
-<section class="card">
- <div class="cardhead"><div><div class="title">Indicator dashboard</div><div class="tiny">Calculated from the generated sample series</div></div><span class="tiny">M15 model</span></div>
- <div class="grid2">
-  <div class="metric"><div class="name">EMA 50</div><strong id="ema50">—</strong><em id="ema50state">Trend average</em></div>
-  <div class="metric"><div class="name">EMA 200</div><strong id="ema200">—</strong><em id="ema200state">Long trend average</em></div>
-  <div class="metric"><div class="name">RSI · 14</div><strong id="rsi">—</strong><div class="bartrack"><div class="barfill" id="rsiBar"></div></div><em id="rsiState">Momentum gauge</em></div>
-  <div class="metric"><div class="name">ATR · 14</div><strong id="atr">—</strong><em>Average true range</em></div>
- </div>
-</section>
-<section class="card">
- <div class="cardhead"><div><div class="title">Historical strategy sandbox</div><div class="tiny">Illustrative rule test on simulated candles only</div></div></div>
- <div class="statgrid"><div class="stat"><small>Sample trades</small><b id="trades">—</b></div><div class="stat"><small>Positive trades</small><b id="wins">—</b></div><div class="stat"><small>Net sample R</small><b id="netr">—</b></div></div>
- <div class="readout" style="margin-top:12px"><span>Method</span><strong>EMA 50/200 + RSI 50</strong></div>
- <div class="readout"><span>Exit model</span><strong>Educational 1.5R / 1R</strong></div>
- <div class="readout"><span>Costs / slippage</span><strong>Not included</strong></div>
- <div class="notice">This sandbox is a coding demonstration, not a reliable estimate of trading performance. It uses generated data, simplified exits and no spreads, commissions or slippage. It must not be used to make financial decisions.</div>
-</section>
-<section class="card">
- <div class="cardhead"><div><div class="title">Recent model events</div><div class="tiny">Latest classifications from sample candles</div></div></div>
- <div class="history" id="history"><div class="historyitem"><span>Waiting for simulation</span><span class="tag wait">WAIT</span></div></div>
-</section>
-<section class="card" id="rules" hidden>
- <div class="title" style="margin-bottom:10px">How the educational rules work</div>
- <div class="readout"><span>Uptrend condition</span><strong>EMA 50 above EMA 200</strong></div>
- <div class="readout"><span>Downtrend condition</span><strong>EMA 50 below EMA 200</strong></div>
- <div class="readout"><span>Momentum filter</span><strong>RSI above / below 50</strong></div>
- <div class="readout"><span>Signal timing</span><strong>Completed sample candle</strong></div>
- <div class="readout"><span>Volatility gauge</span><strong>ATR 14</strong></div>
- <p class="tiny" style="line-height:1.6">These simple rules are for learning indicator calculations. They do not establish an edge, predict future prices or provide trade recommendations.</p>
-</section>
-<footer class="footer">WiseTrendBot · Educational simulator v2.0<br>Not connected to live prices, MT5, a broker or an execution account.</footer>
+</main>
+<nav>
+<a class="on" data-t="dash"><svg viewBox="0 0 24 24"><path d="M3 12l4-5 4 4 5-7 5 6M3 20h18"/></svg>Dashboard</a>
+<a data-t="trades"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Trades</a>
+<a data-t="cfg"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>Strategy</a>
+</nav>
 </div>
 <script>
-(()=>{
-'use strict';
-const $=id=>document.getElementById(id);let candles=[],tf='M15';
-function ema(values,period){const k=2/(period+1);let out=[],v=values[0];for(let i=0;i<values.length;i++){v=i===0?values[i]:values[i]*k+v*(1-k);out.push(v)}return out}
-function rsi(values,period=14){if(values.length<=period)return 50;let gains=0,losses=0;for(let i=1;i<=period;i++){let d=values[i]-values[i-1];if(d>0)gains+=d;else losses-=d}let ag=gains/period,al=losses/period;for(let i=period+1;i<values.length;i++){let d=values[i]-values[i-1];ag=(ag*(period-1)+Math.max(d,0))/period;al=(al*(period-1)+Math.max(-d,0))/period}return al===0?100:100-100/(1+ag/al)}
-function atr(data,period=14){let trs=[];for(let i=1;i<data.length;i++){let p=data[i-1].c,x=data[i];trs.push(Math.max(x.h-x.l,Math.abs(x.h-p),Math.abs(x.l-p)))}let tail=trs.slice(-period);return tail.reduce((a,b)=>a+b,0)/(tail.length||1)}
-function fmt(x){return x.toFixed(5)}
-function generate(){let price=1.083+Math.random()*.003,trend=(Math.random()-.48)*.000012;let arr=[];for(let i=0;i<360;i++){let drift=trend+(Math.random()-.5)*.00016;let o=price;let c=Math.max(1.02,o+drift);let wick=Math.random()*.00011;let h=Math.max(o,c)+wick,l=Math.min(o,c)-Math.random()*.00011;arr.push({o,h,l,c});price=c;if(i%65===0)trend=(Math.random()-.5)*.000025}return arr}
-function calculate(){let closes=candles.map(x=>x.c),e50=ema(closes,50),e200=ema(closes,200),rv=rsi(closes,14),av=atr(candles,14),i=closes.length-1;let up=e50[i]>e200[i]&&closes[i]>e50[i]&&rv>50;let down=e50[i]<e200[i]&&closes[i]<e50[i]&&rv<50;let state=up?'BUY':down?'SELL':'WAIT';$('signal').textContent=state;$('signal').className='signalpill '+(up?'bull':down?'bear':'');$('signalCopy').textContent=up?'The generated sample has a bullish EMA alignment and RSI above 50. This is a simulated classification, not a live signal.':down?'The generated sample has a bearish EMA alignment and RSI below 50. This is a simulated classification, not a live signal.':'The generated sample does not meet both trend and momentum conditions. The model remains in WAIT.';$('price').textContent=fmt(closes[i]);$('ema50').textContent=fmt(e50[i]);$('ema200').textContent=fmt(e200[i]);$('ema50state').textContent=e50[i]>e200[i]?'Above EMA 200':'Below EMA 200';$('ema200state').textContent='Long-term reference';$('rsi').textContent=rv.toFixed(1);$('rsiBar').style.width=Math.max(0,Math.min(100,rv))+'%';$('rsiState').textContent=rv>70?'Upper momentum zone':rv<30?'Lower momentum zone':'Middle momentum zone';$('atr').textContent=av.toFixed(5);draw(e50,e200);backtest(e50,e200);history(e50,e200);}
-function draw(e50,e200){let canvas=$('chart'),ctx=canvas.getContext('2d'),w=canvas.clientWidth,h=canvas.clientHeight,dpr=Math.min(devicePixelRatio||1,2);canvas.width=w*dpr;canvas.height=h*dpr;ctx.scale(dpr,dpr);ctx.clearRect(0,0,w,h);let n=70,start=candles.length-n,data=candles.slice(start),min=Math.min(...data.map(x=>x.l)),max=Math.max(...data.map(x=>x.h)),pad={t:12,b:20,l:5,r:48},cw=w-pad.l-pad.r,ch=h-pad.t-pad.b;let y=v=>pad.t+(max-v)/(max-min||1)*ch;ctx.font='9px -apple-system';ctx.strokeStyle='#20364d';ctx.fillStyle='#8298af';ctx.lineWidth=1;for(let j=0;j<=4;j++){let yy=pad.t+j*ch/4;ctx.beginPath();ctx.moveTo(pad.l,yy);ctx.lineTo(w-pad.r,yy);ctx.stroke();let val=max-(max-min)*j/4;ctx.fillText(val.toFixed(4),w-pad.r+5,yy+3)}let step=cw/n,bw=Math.max(2,step*.55);data.forEach((c,i)=>{let x=pad.l+i*step+step/2,up=c.c>=c.o;ctx.strokeStyle=up?'#50e0b0':'#ff758b';ctx.fillStyle=up?'#50e0b0':'#ff758b';ctx.beginPath();ctx.moveTo(x,y(c.h));ctx.lineTo(x,y(c.l));ctx.stroke();let top=y(Math.max(c.o,c.c)),bot=y(Math.min(c.o,c.c));ctx.fillRect(x-bw/2,top,bw,Math.max(1,bot-top))});function line(vals,color){ctx.beginPath();ctx.strokeStyle=color;ctx.lineWidth=1.7;for(let j=0;j<n;j++){let v=vals[start+j],x=pad.l+j*step+step/2;if(j===0)ctx.moveTo(x,y(v));else ctx.lineTo(x,y(v))}ctx.stroke()}line(e50,'#50e0b0');line(e200,'#79baff');ctx.fillStyle='#8298af';ctx.fillText('−17h',pad.l,h-4);ctx.fillText('now',w-pad.r-20,h-4)}
-function backtest(e50,e200){let trades=0,wins=0,net=0,position=null;for(let i=201;i<candles.length-2;i++){let up=e50[i]>e200[i]&&candles[i].c>e50[i]&&rsi(candles.slice(0,i+1).map(x=>x.c),14)>50;let dn=e50[i]<e200[i]&&candles[i].c<e50[i]&&rsi(candles.slice(0,i+1).map(x=>x.c),14)<50;if(!position&&(up||dn)){let risk=atr(candles.slice(0,i+1),14);position={dir:up?1:-1,entry:candles[i].c,stop:risk,age:0};}else if(position){position.age++;let move=(candles[i].c-position.entry)*position.dir/(position.stop||.00001);if(move<=-1||move>=1.5||position.age>=12){trades++;let result=move<=-1?-1:move>=1.5?1.5:move;net+=result;if(result>0)wins++;position=null;}}}if(position){let i=candles.length-1;let result=(candles[i].c-position.entry)*position.dir/(position.stop||.00001);trades++;net+=result;if(result>0)wins++}$('trades').textContent=trades;$('wins').textContent=trades?Math.round(wins/trades*100)+'%':'—';$('netr').textContent=(net>=0?'+':'')+net.toFixed(1)+'R'}
-function history(e50,e200){let html='';for(let i=candles.length-1;i>=Math.max(201,candles.length-5);i--){let rv=rsi(candles.slice(0,i+1).map(x=>x.c),14),up=e50[i]>e200[i]&&candles[i].c>e50[i]&&rv>50,dn=e50[i]<e200[i]&&candles[i].c<e50[i]&&rv<50,s=up?'BUY':dn?'SELL':'WAIT';html+=`<div class="historyitem"><span>Sample candle ${i+1} · RSI ${rv.toFixed(1)}</span><span class="tag ${s.toLowerCase()}">${s}</span></div>`}$('history').innerHTML=html}
-function refresh(){candles=generate();calculate();$('priceNote').textContent='New simulated series · '+new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}
-$('regenerate').addEventListener('click',refresh);$('showRules').addEventListener('click',()=>{$('rules').hidden=!$('rules').hidden;$('showRules').textContent=$('rules').hidden?'Strategy rules':'Hide rules';if(!$('rules').hidden)$('rules').scrollIntoView({behavior:'smooth',block:'nearest'})});$('view15').addEventListener('click',()=>{tf='M15';$('view15').classList.add('active');$('view60').classList.remove('active');$('priceNote').textContent='15-minute simulation · not live'});$('view60').addEventListener('click',()=>{tf='H1';$('view60').classList.add('active');$('view15').classList.remove('active');$('priceNote').textContent='Hourly-style simulation · same generated sample'});window.addEventListener('resize',()=>{if(candles.length){let c=ema(candles.map(x=>x.c),50),d=ema(candles.map(x=>x.c),200);draw(c,d)}});refresh();
-if('serviceWorker'in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
-})();
+const $=id=>document.getElementById(id);
+const PAIRS={EURUSD:{p:1.0850,d:5,jpy:0},GBPUSD:{p:1.2700,d:5,jpy:0},USDJPY:{p:150.2,d:3,jpy:1},AUDUSD:{p:.6600,d:5,jpy:0}};
+const pipSize=k=>PAIRS[k].jpy?0.01:0.0001;
+const KEY='alphapilot_v1';
+const DEF={bal:10000,pos:[],hist:[],eq:[10000],on:false,halted:false,dayStart:10000,peak:10000,maxDD:0,
+cfg:{risk:1,sl:20,rr:2,fast:5,slow:13,rsi:true,maxPos:3,dailyLoss:3}};
+let S;
+try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+S=Object.assign(JSON.parse(JSON.stringify(DEF)),S||{});
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+
+// market state (not persisted)
+const M={};let drift={};
+for(const k in PAIRS){M[k]={price:PAIRS[k].p,prev:PAIRS[k].p,closes:[PAIRS[k].p],ticks:0};drift[k]=0}
+const BAR_TICKS=6;
+
+const conv=(k,price)=>PAIRS[k].jpy?1/price:1;
+const pnl=(p,price)=>p.dir*(price-p.entry)*p.units*conv(p.pair,price);
+const floating=()=>S.pos.reduce((a,p)=>a+pnl(p,M[p.pair].price),0);
+const equity=()=>S.bal+floating();
+
+function ema(arr,n){const k=2/(n+1);let e=arr[0];const out=[e];for(let i=1;i<arr.length;i++){e=arr[i]*k+e*(1-k);out.push(e)}return out}
+function rsi(arr,n=14){if(arr.length<n+1)return 50;let g=0,l=0;for(let i=arr.length-n;i<arr.length;i++){const d=arr[i]-arr[i-1];d>=0?g+=d:l-=d}return l===0?100:100-100/(1+g/l)}
+
+function signal(k){
+const c=M[k].closes,C=S.cfg;
+if(c.length<C.slow+2)return 0;
+const f=ema(c,C.fast),s=ema(c,C.slow),n=c.length-1;
+const up=f[n-1]<=s[n-1]&&f[n]>s[n],dn=f[n-1]>=s[n-1]&&f[n]<s[n];
+const r=rsi(c);
+if(up&&(!C.rsi||r<70))return 1;
+if(dn&&(!C.rsi||r>30))return -1;
+return 0;
+}
+
+function open(k,dir){
+const C=S.cfg,price=M[k].price,slD=C.sl*pipSize(k),tpD=slD*C.rr;
+const riskUsd=equity()*C.risk/100;
+const units=riskUsd/(slD*conv(k,price));
+S.pos.push({id:Date.now()+Math.random(),pair:k,dir,entry:price,sl:price-dir*slD,tp:price+dir*tpD,units,t:Date.now()});
+}
+function close(p,price,why){
+const v=pnl(p,price);S.bal+=v;
+S.pos=S.pos.filter(x=>x.id!==p.id);
+S.hist.unshift({pair:p.pair,dir:p.dir,entry:p.entry,exit:price,pnl:v,why,t:Date.now()});
+S.hist=S.hist.slice(0,60);
+}
+function flatten(why){S.pos.slice().forEach(p=>close(p,M[p.pair].price,why))}
+
+function tick(){
+for(const k in PAIRS){
+const m=M[k];
+if(Math.random()<.04)drift[k]=(Math.random()-.5)*.00035;
+m.prev=m.price;
+m.price*=1+drift[k]+(Math.random()-.5)*.0006;
+m.ticks++;
+if(m.ticks>=BAR_TICKS){m.ticks=0;m.closes.push(m.price);if(m.closes.length>120)m.closes.shift();
+if(S.on&&!S.halted&&!S.pos.some(p=>p.pair===k)&&S.pos.length<S.cfg.maxPos){const sg=signal(k);if(sg)open(k,sg)}}
+}
+S.pos.slice().forEach(p=>{const pr=M[p.pair].price;
+if(p.dir>0?pr<=p.sl:pr>=p.sl)close(p,p.sl,'SL');
+else if(p.dir>0?pr>=p.tp:pr<=p.tp)close(p,p.tp,'TP')});
+const e=equity();
+S.eq.push(e);if(S.eq.length>240)S.eq.shift();
+S.peak=Math.max(S.peak,e);S.maxDD=Math.max(S.maxDD,(S.peak-e)/S.peak*100);
+if(!S.halted&&(e-S.dayStart)/S.dayStart*100<=-S.cfg.dailyLoss){flatten('LIMIT');S.on=false;S.halted=true}
+save();render();
+}
+
+const money=v=>(v<0?'-':'')+'$'+Math.abs(v).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+const cls=v=>v>=0?'up':'dn';
+const fmt=(k,v)=>v.toFixed(PAIRS[k].d);
+
+function render(){
+const e=equity(),d=e-S.dayStart;
+$('eq').textContent=money(e);
+$('dayPnl').innerHTML=`<span class="${cls(d)}">${d>=0?'+':''}${money(d)} (${(d/S.dayStart*100).toFixed(2)}%)</span> today`;
+const st=$('status');st.className='pill'+(S.halted?' halt':S.on?' on':'');st.textContent=S.halted?'Halted':S.on?'Running':'Stopped';
+$('toggle').textContent=S.on?'Pause bot':'Start bot';
+const w=S.hist.filter(h=>h.pnl>0).length;
+$('wr').textContent=S.hist.length?Math.round(w/S.hist.length*100)+'%':'–';
+$('nt').textContent=S.hist.length;
+const f=floating();$('open').innerHTML=`<span class="${cls(f)}">${money(f)}</span>`;
+$('dd').textContent=S.maxDD.toFixed(2)+'%';
+$('mkts').innerHTML=Object.keys(PAIRS).map(k=>{const m=M[k],u=m.price>=m.prev;
+return `<div class="mkt"><b>${k.slice(0,3)}/${k.slice(3)}</b><span class="${u?'up':'dn'}">${fmt(k,m.price)} ${u?'▲':'▼'}</span></div>`}).join('');
+$('pos').innerHTML=S.pos.length?S.pos.map(p=>{const v=pnl(p,M[p.pair].price);
+return `<div class="pos"><div><span class="tag ${p.dir>0?'buy':'sell'}">${p.dir>0?'BUY':'SELL'}</span><b>${p.pair}</b><div class="sub">@ ${fmt(p.pair,p.entry)} · SL ${fmt(p.pair,p.sl)} · TP ${fmt(p.pair,p.tp)}</div></div><b class="${cls(v)}">${money(v)}</b></div>`}).join(''):'<div class="empty">No open positions</div>';
+$('hist').innerHTML=S.hist.length?S.hist.slice(0,25).map(h=>
+`<div class="hist"><div><span class="tag ${h.dir>0?'buy':'sell'}">${h.dir>0?'BUY':'SELL'}</span><b>${h.pair}</b><div class="sub">${h.why} · ${new Date(h.t).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}</div></div><b class="${cls(h.pnl)}">${money(h.pnl)}</b></div>`).join(''):'<div class="empty">No closed trades yet</div>';
+draw();
+}
+
+function draw(){
+const cv=$('chart'),x=cv.getContext('2d'),W=cv.width,H=cv.height,d=S.eq;
+x.clearRect(0,0,W,H);if(d.length<2)return;
+const mn=Math.min(...d),mx=Math.max(...d),r=(mx-mn)||1;
+const up=d[d.length-1]>=d[0],col=up?'0,229,168':'255,93,122';
+const pt=(v,i)=>[i/(d.length-1)*W,H-12-(v-mn)/r*(H-24)];
+const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,`rgba(${col},.35)`);g.addColorStop(1,`rgba(${col},0)`);
+x.beginPath();d.forEach((v,i)=>{const[a,b]=pt(v,i);i?x.lineTo(a,b):x.moveTo(a,b)});
+x.lineTo(W,H);x.lineTo(0,H);x.closePath();x.fillStyle=g;x.fill();
+x.beginPath();d.forEach((v,i)=>{const[a,b]=pt(v,i);i?x.lineTo(a,b):x.moveTo(a,b)});
+x.strokeStyle=`rgb(${col})`;x.lineWidth=3;x.lineJoin='round';x.stroke();
+}
+
+// UI wiring
+document.querySelectorAll('nav a').forEach(a=>a.onclick=()=>{
+document.querySelectorAll('nav a').forEach(n=>n.classList.toggle('on',n===a));
+document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('show',t.id==='t-'+a.dataset.t));
+if(a.dataset.t==='dash')draw()});
+$('toggle').onclick=()=>{if(S.halted)return alert('Daily loss limit hit. Tap "New trading day" in Strategy to resume.');S.on=!S.on;save();render()};
+$('kill').onclick=()=>{flatten('KILL');S.on=false;save();render()};
+$('reset').onclick=()=>{if(confirm('Reset account to $10,000?')){S=JSON.parse(JSON.stringify(DEF));save();bindCfg();render()}};
+$('newday').onclick=()=>{S.dayStart=equity();S.halted=false;save();render()};
+function bindCfg(){
+for(const k in S.cfg){const el=$(k);if(!el)continue;
+if(el.type==='checkbox'){el.checked=S.cfg[k];el.onchange=()=>{S.cfg[k]=el.checked;save()}}
+else{el.value=S.cfg[k];el.onchange=()=>{const v=parseFloat(el.value);if(v>0){S.cfg[k]=v;save()}else el.value=S.cfg[k]}}}}
+bindCfg();
+
+// PWA: install hint, service worker, PNG touch icon for iOS
+const ios=/iphone|ipad|ipod/i.test(navigator.userAgent),standalone=navigator.standalone||matchMedia('(display-mode: standalone)').matches;
+let deferred;
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;const h=$('hint');h.style.display='block';h.innerHTML='Install AlphaPilot on your device. <b style="color:#22d3ee;cursor:pointer" id="inst">Install</b>';$('inst').onclick=()=>{deferred.prompt();h.style.display='none'}});
+if(ios&&!standalone){const h=$('hint');h.style.display='block';h.innerHTML='To install: tap <b>Share</b>, then <b>Add to Home Screen</b>.';}
+if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+(function(){const im=new Image();im.onload=()=>{try{const c=document.createElement('canvas');c.width=c.height=180;c.getContext('2d').drawImage(im,0,0,180,180);$('touchIcon').href=c.toDataURL('image/png')}catch(e){}};im.src='icon.svg'})();
+
+render();
+setInterval(tick,1000);
 </script>
-</body></html>
+</body>
+</html>
