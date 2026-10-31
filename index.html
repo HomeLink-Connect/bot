@@ -1,73 +1,87 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#081321">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="WiseTrendBot">
-  <title>WiseTrendBot</title>
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="apple-touch-icon" href="icon.svg">
-  <style>
-    :root{color-scheme:dark;--bg:#081321;--panel:#101f31;--panel2:#14263b;--line:#23374d;--muted:#91a4b9;--text:#edf4fb;--green:#36d6a0;--red:#ff7185;--blue:#75b8ff}
-    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#142a40 0,#081321 48%);color:var(--text);font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:env(safe-area-inset-top) 16px calc(24px + env(safe-area-inset-bottom))}
-    .wrap{max-width:620px;margin:0 auto}.top{display:flex;justify-content:space-between;align-items:center;padding:18px 2px 22px}.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px}.logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(145deg,#1b8c82,#164b69);display:grid;place-items:center;font-weight:900;color:white}.tag{font-size:11px;color:#ffd58a;border:1px solid #725b31;background:#382d1a;padding:6px 9px;border-radius:20px}
-    .eyebrow{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:1.3px}.pair{font-size:25px;font-weight:800;margin:5px 0}.sub{color:var(--muted);font-size:13px}.card{background:linear-gradient(160deg,rgba(20,38,59,.98),rgba(13,28,44,.98));border:1px solid var(--line);border-radius:20px;padding:17px;margin:13px 0;box-shadow:0 12px 30px #0002}.price-row{display:flex;align-items:end;justify-content:space-between;margin-top:16px}.price{font-size:32px;font-weight:800;letter-spacing:-1px}.change{color:var(--green);font-weight:700;font-size:13px}.signal{display:flex;align-items:center;justify-content:space-between;gap:12px}.signal-pill{font-weight:800;letter-spacing:.6px;padding:9px 13px;border-radius:12px;background:#24364a;color:#c8d5e3}.signal-pill.wait{color:#ffd58a;background:#3a301e}.signal-pill.buy{color:var(--green);background:#12382f}.signal-pill.sell{color:var(--red);background:#402431}
-    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.metric{background:#0b1929;border:1px solid #1d3045;border-radius:14px;padding:13px}.metric small{display:block;color:var(--muted);font-size:11px;margin-bottom:7px}.metric strong{font-size:19px}.meter{height:7px;background:#25384d;border-radius:8px;overflow:hidden;margin-top:10px}.meter span{display:block;height:100%;width:50%;background:linear-gradient(90deg,#42c99a,#75b8ff);border-radius:8px}
-    .chart{height:150px;display:flex;align-items:end;gap:5px;padding:12px 2px 2px}.bar{flex:1;border-radius:4px 4px 1px 1px;min-width:5px;background:linear-gradient(#38c99b,#167b70);opacity:.9}.bar.down{background:linear-gradient(#ff8797,#a8445b)}.chart-labels{display:flex;justify-content:space-between;color:var(--muted);font-size:10px}
-    .section-title{font-size:16px;font-weight:750;margin-bottom:13px}.row{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #203248}.row:last-child{border:0}.row span:first-child{color:var(--muted)}.notice{font-size:12px;line-height:1.55;color:#b4c2d1;background:#19283a;border-radius:13px;padding:12px;margin-top:14px}.btn{width:100%;border:1px solid #2a4963;background:#173650;color:#eaf5ff;padding:13px;border-radius:13px;font-weight:750;font-size:14px;margin-top:12px}.foot{text-align:center;color:#71869c;font-size:11px;padding:16px 4px}.tabs{display:flex;gap:8px;margin:12px 0}.tab{flex:1;text-align:center;border:1px solid var(--line);border-radius:10px;padding:9px;color:var(--muted);font-size:12px}.tab.active{background:#173650;color:white;border-color:#316080}
-    @media(min-width:560px){body{padding-top:24px}.pair{font-size:29px}}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07111f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="WiseTrendBot">
+<meta name="description" content="WiseTrendBot educational EUR/USD trend analysis simulator.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon.svg">
+<title>WiseTrendBot | EUR/USD Lab</title>
+<style>
+:root{color-scheme:dark;--bg:#07111f;--surface:#0d1b2b;--surface2:#12243a;--line:#20364d;--text:#eff6ff;--muted:#8fa4ba;--mint:#50e0b0;--red:#ff758b;--blue:#79baff;--gold:#f4c879;--shadow:0 16px 38px #0004}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 50% -15%,#1a3851 0,transparent 48%),var(--bg);color:var(--text);font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:env(safe-area-inset-top) 14px calc(28px + env(safe-area-inset-bottom))}.app{max-width:720px;margin:auto}.topbar{display:flex;align-items:center;justify-content:space-between;padding:17px 2px 19px}.brand{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:850;letter-spacing:-.3px}.brand small{display:block;color:var(--muted);font-size:10px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase}.logo{width:40px;height:40px;border-radius:13px;background:linear-gradient(145deg,#168f86,#174b70);display:grid;place-items:center;font-size:20px;font-weight:900;box-shadow:0 7px 20px #0a82744a}.demo{border:1px solid #66552f;background:#332b1c;color:#f7d58f;border-radius:30px;padding:6px 10px;font-size:10px;font-weight:800;letter-spacing:.7px}.hero{background:linear-gradient(135deg,#132c42,#0d1b2b 72%);border:1px solid #28445d;border-radius:22px;padding:18px;box-shadow:var(--shadow);position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;background:#2bbf9b0c;right:-70px;top:-85px}.eyebrow{color:var(--muted);font-size:10px;font-weight:750;letter-spacing:1.35px;text-transform:uppercase}.pairline{display:flex;justify-content:space-between;align-items:center;gap:10px}.pair{font-size:25px;font-weight:850;letter-spacing:-.8px;margin-top:4px}.timechip{border:1px solid #29435c;background:#0b1b2b;color:#b8cbe0;padding:7px 10px;border-radius:10px;font-size:11px;font-weight:750}.pricebox{display:flex;align-items:end;justify-content:space-between;margin-top:17px}.price{font-size:34px;line-height:1;font-weight:850;letter-spacing:-1.5px}.price-note{font-size:11px;color:var(--muted);margin-top:6px}.market-state{font-size:11px;color:var(--gold);font-weight:750;text-align:right}.card{background:linear-gradient(155deg,#102137,#0b1928);border:1px solid var(--line);border-radius:19px;padding:16px;margin-top:13px;box-shadow:0 9px 24px #0002}.cardhead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:13px}.title{font-size:14px;font-weight:800;letter-spacing:-.1px}.muted{color:var(--muted)}.tiny{font-size:10px;color:var(--muted)}.signalrow{display:flex;justify-content:space-between;align-items:center;gap:12px}.signalpill{padding:8px 13px;border-radius:10px;font-size:11px;font-weight:900;letter-spacing:1px;background:#302b20;color:var(--gold);border:1px solid #66552f}.signalpill.bull{background:#10352e;color:var(--mint);border-color:#216d5a}.signalpill.bear{background:#3c202c;color:var(--red);border-color:#74384b}.signalcopy{font-size:12px;color:#c0cede;margin-top:8px;line-height:1.5}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.metric{background:#091725;border:1px solid #1c3045;border-radius:13px;padding:12px;min-width:0}.metric .name{font-size:10px;color:var(--muted);font-weight:750;letter-spacing:.7px;text-transform:uppercase}.metric strong{display:block;font-size:19px;margin-top:5px;letter-spacing:-.5px}.metric em{display:block;font-size:10px;color:var(--muted);font-style:normal;margin-top:2px}.chartwrap{position:relative;width:100%;height:245px}.chartwrap canvas{width:100%;height:100%;display:block}.legend{display:flex;gap:13px;flex-wrap:wrap;margin-top:7px}.legend span{font-size:10px;color:var(--muted);display:flex;align-items:center;gap:5px}.dot{width:7px;height:7px;border-radius:50%;display:inline-block}.actions{display:flex;gap:8px}.btn{border:1px solid #2b4a63;background:#15334d;color:#eff8ff;border-radius:11px;padding:10px 12px;font-size:11px;font-weight:800}.btn.primary{background:linear-gradient(135deg,#167b70,#155a70);border-color:#238b7c}.btn:active{transform:scale(.98)}.btnrow{display:flex;gap:8px;flex-wrap:wrap}.bartrack{height:7px;border-radius:20px;background:#24384d;overflow:hidden;margin-top:8px}.barfill{height:100%;width:50%;background:linear-gradient(90deg,#39c99b,#7abaff);border-radius:20px}.readout{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid #1d3044;font-size:12px}.readout:last-child{border:0}.readout span:first-child{color:var(--muted)}.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:#091725;border:1px solid #1d3044;border-radius:12px;padding:11px 8px}.stat small{display:block;color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:.6px}.stat b{display:block;font-size:18px;margin-top:5px}.history{display:grid;gap:8px}.historyitem{display:flex;justify-content:space-between;align-items:center;background:#091725;border:1px solid #1d3044;border-radius:11px;padding:10px 11px;font-size:11px}.tag{font-size:9px;font-weight:900;padding:4px 7px;border-radius:6px}.tag.buy{color:var(--mint);background:#12372f}.tag.sell{color:var(--red);background:#3b202b}.tag.wait{color:var(--gold);background:#352d1e}.notice{border:1px solid #57492d;background:#292619;color:#d9c99f;padding:11px 12px;border-radius:12px;font-size:10px;line-height:1.55;margin-top:12px}.footer{text-align:center;color:#6f849a;font-size:10px;padding:18px 5px 5px}.sectiongap{margin-top:18px}.pilltabs{display:flex;gap:7px}.pilltabs button{flex:1;background:#0a1928;color:var(--muted);border:1px solid #21374d;padding:8px 5px;border-radius:9px;font-size:10px;font-weight:800}.pilltabs button.active{background:#173b55;color:#fff;border-color:#34708d}
+@media(min-width:600px){body{padding-top:25px}.hero{padding:22px}.chartwrap{height:285px}}
+</style>
 </head>
 <body>
-<div class="wrap">
-  <header class="top"><div class="brand"><div class="logo">W</div><div>WiseTrendBot<div class="sub">EUR/USD trend monitor</div></div></div><div class="tag">DEMO PREVIEW</div></header>
-  <section class="card">
-    <div class="eyebrow">Market overview · M15</div><div class="pair">EUR / USD</div><div class="sub">Illustrative interface data — not a live quote</div>
-    <div class="price-row"><div><div class="eyebrow">Sample price</div><div class="price">1.08425</div></div><div class="change">+0.12% <div class="sub">Example only</div></div></div>
-  </section>
-  <section class="card">
-    <div class="signal"><div><div class="eyebrow">Current strategy status</div><div class="section-title" style="margin:6px 0 0">Trend signal</div></div><div class="signal-pill wait" id="signal">WAIT</div></div>
-    <div class="notice">This preview uses sample values. It does not connect to a broker, receive live prices, or place trades. Live data will be added only after choosing and configuring a market-data provider.</div>
-  </section>
-  <section class="card">
-    <div class="section-title">Indicator panel</div>
-    <div class="grid">
-      <div class="metric"><small>EMA 50 · sample</small><strong>1.08410</strong></div>
-      <div class="metric"><small>EMA 200 · sample</small><strong>1.08380</strong></div>
-      <div class="metric"><small>RSI 14 · sample</small><strong>54.6</strong><div class="meter"><span style="width:54.6%"></span></div></div>
-      <div class="metric"><small>ATR 14 · sample</small><strong>0.00082</strong></div>
-    </div>
-  </section>
-  <section class="card">
-    <div class="section-title">Illustrative price movement</div>
-    <div class="chart" aria-label="Decorative sample chart">
-      <i class="bar" style="height:42%"></i><i class="bar down" style="height:34%"></i><i class="bar" style="height:48%"></i><i class="bar" style="height:55%"></i><i class="bar down" style="height:43%"></i><i class="bar" style="height:60%"></i><i class="bar" style="height:52%"></i><i class="bar down" style="height:46%"></i><i class="bar" style="height:67%"></i><i class="bar" style="height:73%"></i><i class="bar down" style="height:62%"></i><i class="bar" style="height:82%"></i><i class="bar" style="height:75%"></i><i class="bar" style="height:91%"></i><i class="bar down" style="height:80%"></i><i class="bar" style="height:96%"></i>
-    </div><div class="chart-labels"><span>Earlier</span><span>Sample candles · not market data</span><span>Latest</span></div>
-  </section>
-  <section class="card">
-    <div class="section-title">Strategy rules</div>
-    <div class="row"><span>Chart timeframe</span><strong>M15</strong></div>
-    <div class="row"><span>Trend filter</span><strong>EMA 50 / EMA 200</strong></div>
-    <div class="row"><span>Momentum filter</span><strong>RSI 14</strong></div>
-    <div class="row"><span>Volatility measure</span><strong>ATR 14</strong></div>
-    <div class="row"><span>Trading mode</span><strong>Signal-only demo</strong></div>
-    <button class="btn" id="refresh">Refresh preview</button>
-  </section>
-  <div class="foot">WiseTrendBot · Educational demo interface<br>Trading involves risk. Signals are not guarantees of results.</div>
+<div class="app">
+<header class="topbar"><div class="brand"><div class="logo">W</div><div>WiseTrendBot<small>EUR/USD learning lab</small></div></div><div class="demo">SIMULATOR · DEMO</div></header>
+<section class="hero">
+ <div class="pairline"><div><div class="eyebrow">Selected market</div><div class="pair">EUR / USD</div></div><div class="timechip">15 MIN · M15</div></div>
+ <div class="pricebox"><div><div class="eyebrow">Simulated last price</div><div class="price" id="price">1.08425</div><div class="price-note" id="priceNote">Illustrative market series · not live</div></div><div class="market-state" id="marketState">SIMULATED DATA<br><span class="tiny">No broker connection</span></div></div>
+</section>
+<section class="card">
+ <div class="signalrow"><div><div class="eyebrow">Strategy assessment</div><div class="title" style="margin-top:4px">EMA trend + RSI confirmation</div></div><div class="signalpill" id="signal">WAIT</div></div>
+ <div class="signalcopy" id="signalCopy">Generate a fresh educational price series to see how the indicator rules classify the latest completed sample candle.</div>
+</section>
+<section class="card">
+ <div class="cardhead"><div><div class="title">Price action</div><div class="tiny">Synthetic candles with EMA overlays</div></div><div class="pilltabs"><button class="active" id="view15">M15</button><button id="view60">H1</button></div></div>
+ <div class="chartwrap"><canvas id="chart" aria-label="Simulated candlestick chart with moving averages"></canvas></div>
+ <div class="legend"><span><i class="dot" style="background:#50e0b0"></i>EMA 50</span><span><i class="dot" style="background:#79baff"></i>EMA 200</span><span><i class="dot" style="background:#d6e2ef"></i>Sample candles</span></div>
+ <div class="btnrow" style="margin-top:14px"><button class="btn primary" id="regenerate">Generate new simulation</button><button class="btn" id="showRules">Strategy rules</button></div>
+</section>
+<section class="card">
+ <div class="cardhead"><div><div class="title">Indicator dashboard</div><div class="tiny">Calculated from the generated sample series</div></div><span class="tiny">M15 model</span></div>
+ <div class="grid2">
+  <div class="metric"><div class="name">EMA 50</div><strong id="ema50">—</strong><em id="ema50state">Trend average</em></div>
+  <div class="metric"><div class="name">EMA 200</div><strong id="ema200">—</strong><em id="ema200state">Long trend average</em></div>
+  <div class="metric"><div class="name">RSI · 14</div><strong id="rsi">—</strong><div class="bartrack"><div class="barfill" id="rsiBar"></div></div><em id="rsiState">Momentum gauge</em></div>
+  <div class="metric"><div class="name">ATR · 14</div><strong id="atr">—</strong><em>Average true range</em></div>
+ </div>
+</section>
+<section class="card">
+ <div class="cardhead"><div><div class="title">Historical strategy sandbox</div><div class="tiny">Illustrative rule test on simulated candles only</div></div></div>
+ <div class="statgrid"><div class="stat"><small>Sample trades</small><b id="trades">—</b></div><div class="stat"><small>Positive trades</small><b id="wins">—</b></div><div class="stat"><small>Net sample R</small><b id="netr">—</b></div></div>
+ <div class="readout" style="margin-top:12px"><span>Method</span><strong>EMA 50/200 + RSI 50</strong></div>
+ <div class="readout"><span>Exit model</span><strong>Educational 1.5R / 1R</strong></div>
+ <div class="readout"><span>Costs / slippage</span><strong>Not included</strong></div>
+ <div class="notice">This sandbox is a coding demonstration, not a reliable estimate of trading performance. It uses generated data, simplified exits and no spreads, commissions or slippage. It must not be used to make financial decisions.</div>
+</section>
+<section class="card">
+ <div class="cardhead"><div><div class="title">Recent model events</div><div class="tiny">Latest classifications from sample candles</div></div></div>
+ <div class="history" id="history"><div class="historyitem"><span>Waiting for simulation</span><span class="tag wait">WAIT</span></div></div>
+</section>
+<section class="card" id="rules" hidden>
+ <div class="title" style="margin-bottom:10px">How the educational rules work</div>
+ <div class="readout"><span>Uptrend condition</span><strong>EMA 50 above EMA 200</strong></div>
+ <div class="readout"><span>Downtrend condition</span><strong>EMA 50 below EMA 200</strong></div>
+ <div class="readout"><span>Momentum filter</span><strong>RSI above / below 50</strong></div>
+ <div class="readout"><span>Signal timing</span><strong>Completed sample candle</strong></div>
+ <div class="readout"><span>Volatility gauge</span><strong>ATR 14</strong></div>
+ <p class="tiny" style="line-height:1.6">These simple rules are for learning indicator calculations. They do not establish an edge, predict future prices or provide trade recommendations.</p>
+</section>
+<footer class="footer">WiseTrendBot · Educational simulator v2.0<br>Not connected to live prices, MT5, a broker or an execution account.</footer>
 </div>
 <script>
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {}));
-  }
-  document.getElementById("refresh").addEventListener("click", () => {
-    const el = document.getElementById("signal");
-    el.textContent = "WAIT";
-    el.className = "signal-pill wait";
-    alert("Preview refreshed. These are still sample values, not live market data.");
-  });
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);let candles=[],tf='M15';
+function ema(values,period){const k=2/(period+1);let out=[],v=values[0];for(let i=0;i<values.length;i++){v=i===0?values[i]:values[i]*k+v*(1-k);out.push(v)}return out}
+function rsi(values,period=14){if(values.length<=period)return 50;let gains=0,losses=0;for(let i=1;i<=period;i++){let d=values[i]-values[i-1];if(d>0)gains+=d;else losses-=d}let ag=gains/period,al=losses/period;for(let i=period+1;i<values.length;i++){let d=values[i]-values[i-1];ag=(ag*(period-1)+Math.max(d,0))/period;al=(al*(period-1)+Math.max(-d,0))/period}return al===0?100:100-100/(1+ag/al)}
+function atr(data,period=14){let trs=[];for(let i=1;i<data.length;i++){let p=data[i-1].c,x=data[i];trs.push(Math.max(x.h-x.l,Math.abs(x.h-p),Math.abs(x.l-p)))}let tail=trs.slice(-period);return tail.reduce((a,b)=>a+b,0)/(tail.length||1)}
+function fmt(x){return x.toFixed(5)}
+function generate(){let price=1.083+Math.random()*.003,trend=(Math.random()-.48)*.000012;let arr=[];for(let i=0;i<360;i++){let drift=trend+(Math.random()-.5)*.00016;let o=price;let c=Math.max(1.02,o+drift);let wick=Math.random()*.00011;let h=Math.max(o,c)+wick,l=Math.min(o,c)-Math.random()*.00011;arr.push({o,h,l,c});price=c;if(i%65===0)trend=(Math.random()-.5)*.000025}return arr}
+function calculate(){let closes=candles.map(x=>x.c),e50=ema(closes,50),e200=ema(closes,200),rv=rsi(closes,14),av=atr(candles,14),i=closes.length-1;let up=e50[i]>e200[i]&&closes[i]>e50[i]&&rv>50;let down=e50[i]<e200[i]&&closes[i]<e50[i]&&rv<50;let state=up?'BUY':down?'SELL':'WAIT';$('signal').textContent=state;$('signal').className='signalpill '+(up?'bull':down?'bear':'');$('signalCopy').textContent=up?'The generated sample has a bullish EMA alignment and RSI above 50. This is a simulated classification, not a live signal.':down?'The generated sample has a bearish EMA alignment and RSI below 50. This is a simulated classification, not a live signal.':'The generated sample does not meet both trend and momentum conditions. The model remains in WAIT.';$('price').textContent=fmt(closes[i]);$('ema50').textContent=fmt(e50[i]);$('ema200').textContent=fmt(e200[i]);$('ema50state').textContent=e50[i]>e200[i]?'Above EMA 200':'Below EMA 200';$('ema200state').textContent='Long-term reference';$('rsi').textContent=rv.toFixed(1);$('rsiBar').style.width=Math.max(0,Math.min(100,rv))+'%';$('rsiState').textContent=rv>70?'Upper momentum zone':rv<30?'Lower momentum zone':'Middle momentum zone';$('atr').textContent=av.toFixed(5);draw(e50,e200);backtest(e50,e200);history(e50,e200);}
+function draw(e50,e200){let canvas=$('chart'),ctx=canvas.getContext('2d'),w=canvas.clientWidth,h=canvas.clientHeight,dpr=Math.min(devicePixelRatio||1,2);canvas.width=w*dpr;canvas.height=h*dpr;ctx.scale(dpr,dpr);ctx.clearRect(0,0,w,h);let n=70,start=candles.length-n,data=candles.slice(start),min=Math.min(...data.map(x=>x.l)),max=Math.max(...data.map(x=>x.h)),pad={t:12,b:20,l:5,r:48},cw=w-pad.l-pad.r,ch=h-pad.t-pad.b;let y=v=>pad.t+(max-v)/(max-min||1)*ch;ctx.font='9px -apple-system';ctx.strokeStyle='#20364d';ctx.fillStyle='#8298af';ctx.lineWidth=1;for(let j=0;j<=4;j++){let yy=pad.t+j*ch/4;ctx.beginPath();ctx.moveTo(pad.l,yy);ctx.lineTo(w-pad.r,yy);ctx.stroke();let val=max-(max-min)*j/4;ctx.fillText(val.toFixed(4),w-pad.r+5,yy+3)}let step=cw/n,bw=Math.max(2,step*.55);data.forEach((c,i)=>{let x=pad.l+i*step+step/2,up=c.c>=c.o;ctx.strokeStyle=up?'#50e0b0':'#ff758b';ctx.fillStyle=up?'#50e0b0':'#ff758b';ctx.beginPath();ctx.moveTo(x,y(c.h));ctx.lineTo(x,y(c.l));ctx.stroke();let top=y(Math.max(c.o,c.c)),bot=y(Math.min(c.o,c.c));ctx.fillRect(x-bw/2,top,bw,Math.max(1,bot-top))});function line(vals,color){ctx.beginPath();ctx.strokeStyle=color;ctx.lineWidth=1.7;for(let j=0;j<n;j++){let v=vals[start+j],x=pad.l+j*step+step/2;if(j===0)ctx.moveTo(x,y(v));else ctx.lineTo(x,y(v))}ctx.stroke()}line(e50,'#50e0b0');line(e200,'#79baff');ctx.fillStyle='#8298af';ctx.fillText('−17h',pad.l,h-4);ctx.fillText('now',w-pad.r-20,h-4)}
+function backtest(e50,e200){let trades=0,wins=0,net=0,position=null;for(let i=201;i<candles.length-2;i++){let up=e50[i]>e200[i]&&candles[i].c>e50[i]&&rsi(candles.slice(0,i+1).map(x=>x.c),14)>50;let dn=e50[i]<e200[i]&&candles[i].c<e50[i]&&rsi(candles.slice(0,i+1).map(x=>x.c),14)<50;if(!position&&(up||dn)){let risk=atr(candles.slice(0,i+1),14);position={dir:up?1:-1,entry:candles[i].c,stop:risk,age:0};}else if(position){position.age++;let move=(candles[i].c-position.entry)*position.dir/(position.stop||.00001);if(move<=-1||move>=1.5||position.age>=12){trades++;let result=move<=-1?-1:move>=1.5?1.5:move;net+=result;if(result>0)wins++;position=null;}}}if(position){let i=candles.length-1;let result=(candles[i].c-position.entry)*position.dir/(position.stop||.00001);trades++;net+=result;if(result>0)wins++}$('trades').textContent=trades;$('wins').textContent=trades?Math.round(wins/trades*100)+'%':'—';$('netr').textContent=(net>=0?'+':'')+net.toFixed(1)+'R'}
+function history(e50,e200){let html='';for(let i=candles.length-1;i>=Math.max(201,candles.length-5);i--){let rv=rsi(candles.slice(0,i+1).map(x=>x.c),14),up=e50[i]>e200[i]&&candles[i].c>e50[i]&&rv>50,dn=e50[i]<e200[i]&&candles[i].c<e50[i]&&rv<50,s=up?'BUY':dn?'SELL':'WAIT';html+=`<div class="historyitem"><span>Sample candle ${i+1} · RSI ${rv.toFixed(1)}</span><span class="tag ${s.toLowerCase()}">${s}</span></div>`}$('history').innerHTML=html}
+function refresh(){candles=generate();calculate();$('priceNote').textContent='New simulated series · '+new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}
+$('regenerate').addEventListener('click',refresh);$('showRules').addEventListener('click',()=>{$('rules').hidden=!$('rules').hidden;$('showRules').textContent=$('rules').hidden?'Strategy rules':'Hide rules';if(!$('rules').hidden)$('rules').scrollIntoView({behavior:'smooth',block:'nearest'})});$('view15').addEventListener('click',()=>{tf='M15';$('view15').classList.add('active');$('view60').classList.remove('active');$('priceNote').textContent='15-minute simulation · not live'});$('view60').addEventListener('click',()=>{tf='H1';$('view60').classList.add('active');$('view15').classList.remove('active');$('priceNote').textContent='Hourly-style simulation · same generated sample'});window.addEventListener('resize',()=>{if(candles.length){let c=ema(candles.map(x=>x.c),50),d=ema(candles.map(x=>x.c),200);draw(c,d)}});refresh();
+if('serviceWorker'in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
+})();
 </script>
-</body>
-</html>
+</body></html>
